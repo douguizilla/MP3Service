@@ -1,6 +1,6 @@
 package com.odougle.mp3service.services
 
-interface MP3Service {
+interface Mp3Service {
     fun play(file: String)
     fun pause()
     fun stop()
