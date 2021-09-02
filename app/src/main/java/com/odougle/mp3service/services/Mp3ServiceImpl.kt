@@ -65,6 +65,23 @@ class Mp3ServiceImpl : Service(), Mp3Service {
         }
     }
 
+    override val currentSong: String?
+        get() = currentFile
+
+    override val totalTime: Int
+        get() {
+            return if(mediaPlayer.isPlaying || isPaused){
+                mediaPlayer.duration
+            } else 0
+        }
+
+    override val elapsedTime: Int
+        get() {
+            return if(mediaPlayer.isPlaying || isPaused){
+                mediaPlayer.currentPosition
+            } else 0
+        }
+
     companion object{
         val EXTRA_ACTION = "${Mp3ServiceImpl::class.java.`package`.name}.EXTRA_ACTION"
         val EXTRA_FILE = "${Mp3ServiceImpl::class.java.`package`.name}.EXTRA_FILE}"
