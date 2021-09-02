@@ -51,11 +51,15 @@ class Mp3ServiceImpl : Service(), Mp3Service {
     }
 
     override fun pause() {
-        TODO("Not yet implemented")
+
     }
 
     override fun stop() {
-        TODO("Not yet implemented")
+        if(mediaPlayer.isPlaying || isPaused){
+            isPaused = false
+            mediaPlayer.stop()
+            mediaPlayer.reset()
+        }
     }
 
     companion object{
