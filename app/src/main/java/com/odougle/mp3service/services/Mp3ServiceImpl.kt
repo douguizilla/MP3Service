@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.IBinder
+import java.io.FileInputStream
 
 class Mp3ServiceImpl : Service(), Mp3Service {
 
@@ -33,7 +34,20 @@ class Mp3ServiceImpl : Service(), Mp3Service {
     //Implementação da interface Mp3Service
 
     override fun play(file: String) {
-        TODO("Not yet implemented")
+        if(!mediaPlayer.isPlaying && !isPaused){
+            try {
+                mediaPlayer.reset()
+                val fis = FileInputStream(file)
+                mediaPlayer.setDataSource(fis.fd)
+                mediaPlayer.prepare()
+                currentFile = file
+            }catch (e: Exception){
+                e.printStackTrace()
+                return
+            }
+        }
+        isPaused = false
+        mediaPlayer.start()
     }
 
     override fun pause() {
