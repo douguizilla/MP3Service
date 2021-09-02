@@ -51,7 +51,10 @@ class Mp3ServiceImpl : Service(), Mp3Service {
     }
 
     override fun pause() {
-
+        if(mediaPlayer.isPlaying){
+            isPaused = true
+            mediaPlayer.pause()
+        }
     }
 
     override fun stop() {
