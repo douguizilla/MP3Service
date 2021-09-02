@@ -2,11 +2,53 @@ package com.odougle.mp3service.services
 
 import android.app.Service
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.IBinder
 
-class Mp3ServiceImpl : Service() {
+class Mp3ServiceImpl : Service(), Mp3Service {
 
-    override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+    private lateinit var mediaPlayer: MediaPlayer
+    private var isPaused: Boolean = false
+    private var currentFile: String? = null
+
+    override fun onCreate() {
+        super.onCreate()
+        mediaPlayer = MediaPlayer()
+    }
+
+    override fun onBind(intent: Intent): IBinder? = Mp3Binder(this)
+
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        if(intent != null){
+            when (intent.getStringExtra(EXTRA_ACTION)){
+                ACTION_PLAY -> play(intent.getStringExtra(EXTRA_FILE)!!)
+                ACTION_PAUSE -> pause()
+                ACTION_STOP -> stop()
+            }
+        }
+        return super.onStartCommand(intent, flags, startId)
+    }
+
+    //Implementação da interface Mp3Service
+
+    override fun play(file: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun pause() {
+        TODO("Not yet implemented")
+    }
+
+    override fun stop() {
+        TODO("Not yet implemented")
+    }
+
+    companion object{
+        val EXTRA_ACTION = "${Mp3ServiceImpl::class.java.`package`.name}.EXTRA_ACTION"
+        val EXTRA_FILE = "${Mp3ServiceImpl::class.java.`package`.name}.EXTRA_FILE}"
+        val ACTION_PLAY = "${Mp3ServiceImpl::class.java.`package`.name}.ACTION_PLAY}"
+        val ACTION_PAUSE = "${Mp3ServiceImpl::class.java.`package`.name}.ACTION_PAUSE}"
+        val ACTION_STOP = "${Mp3ServiceImpl::class.java.`package`.name}.ACTION_STOP}"
     }
 }
