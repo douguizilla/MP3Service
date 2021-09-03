@@ -4,8 +4,10 @@ import android.content.ServiceConnection
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.widget.AdapterView
+import android.widget.SimpleCursorAdapter
 import androidx.loader.app.LoaderManager
 import com.odougle.mp3service.databinding.ActivityMp3Binding
 import com.odougle.mp3service.services.Mp3Service
@@ -20,6 +22,20 @@ class Mp3Activity : AppCompatActivity(), ServiceConnection, AdapterView.OnItemCl
         MediaStore.MediaColumns.DATA,
         MediaStore.MediaColumns._ID
     )
+
+    private val adapter : SimpleCursorAdapter by lazy {
+        SimpleCursorAdapter(
+            this,
+            android.R.layout.simple_list_item_2,
+            null,
+            columns,
+            intArrayOf(android.R.id.text1, android.R.id.text2),
+            0
+        )
+    }
+
+    private lateinit var handler: Handler
+    private lateinit var threadProgress: Runnable
 
     private val binding: ActivityMp3Binding by lazy {
         ActivityMp3Binding.inflate(layoutInflater)
