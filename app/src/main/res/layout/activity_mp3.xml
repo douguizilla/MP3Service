@@ -14,8 +14,8 @@
         android:layout_margin="16dp"
         android:text="@null"
         tools:text="Nome da musica"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
 
@@ -37,7 +37,6 @@
         android:text="@null"
         tools:text="03:41"
         app:layout_constraintEnd_toEndOf="@+id/progressBar"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/progressBar"
         />
 
@@ -45,6 +44,7 @@
         android:id="@+id/btnPlay"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="@string/play_button_label"
         app:layout_constraintEnd_toStartOf="@+id/btnPause"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +55,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/pause_button_label"
-        app:layout_constraintStart_toEndOf="@+id/btnStop"
-        app:layout_constraintStart_toStartOf="@+id/btnPlay"
+        app:layout_constraintEnd_toStartOf="@+id/btnStop"
+        app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toTopOf="@+id/btnPlay"
         />
     <Button
@@ -64,10 +64,21 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/stop_button_label"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPause"
         app:layout_constraintTop_toTopOf="@+id/btnPause"
         />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPlay"/>
 
 
 
