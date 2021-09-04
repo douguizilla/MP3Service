@@ -117,6 +117,8 @@ class Mp3Activity : AppCompatActivity(), ServiceConnection, AdapterView.OnItemCl
         bindService(intent, this, 0)
     }
 
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -129,6 +131,15 @@ class Mp3Activity : AppCompatActivity(), ServiceConnection, AdapterView.OnItemCl
             Toast.makeText(this, "Permissão negada.", Toast.LENGTH_SHORT).show()
             finish()
         }
+    }
+
+    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+        return CursorLoader(this,
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            columns,
+            MediaStore.Audio.AudioColumns.IS_MUSIC + " = 1",
+            null,
+            null)
     }
 
     override fun onPause() {
@@ -163,15 +174,6 @@ class Mp3Activity : AppCompatActivity(), ServiceConnection, AdapterView.OnItemCl
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
         adapter.swapCursor(null)
-    }
-
-    override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-        return CursorLoader(this,
-        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-        columns,
-        MediaStore.Audio.AudioColumns.IS_MUSIC + " = 1",
-        null,
-        null)
     }
 
 }
